@@ -2,8 +2,8 @@
 #include <SPI.h>
 #include <SoftwareSerial.h>
 //#define EOUT D5 //Using a digital pin for sending the signal to the UNO
-const char* ssid = "Hariram1";
-const char* password = "12a34b56c9";
+const char* ssid = "007";
+const char* password = "adish007";
 
 WiFiServer server(80);
 
@@ -85,7 +85,7 @@ client.println("<br />");
  client.println("<a href=\"/SolarTracker\"\"> <button style='FONT-SIZE: 50px; HEIGHT: 200px;WIDTH: 300px; 126px; Z-INDEX: 0; TOP: 200px;'> Solar Tracking </button> </a>");
  client.println("<a href=\"/RainWaterHarvesting\"\"> <button style='FONT-SIZE: 50px; HEIGHT: 200px; WIDTH: 300px; 126px; Z-INDEX: 0; TOP: 200px;'> Rain Water Harvesting </button> </a>");
  //client.println("<a href=http://192.168.1.15:5000>  HOME  </a>"); //PI IP ADDRESS
- client.println("<a href=http://192.168.1.15:5000> <button style='FONT-SIZE: 50px; HEIGHT: 200px;WIDTH: 250px; 126px; Z-INDEX: 0; TOP: 200px;'> Back Home </button> </a>");
+ client.println("<a href=http://192.168.43.186:5000> <button style='FONT-SIZE: 50px; HEIGHT: 200px;WIDTH: 250px; 126px; Z-INDEX: 0; TOP: 200px;'> Back Home </button> </a>");
 
 
  

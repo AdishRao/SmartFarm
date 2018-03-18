@@ -7,8 +7,8 @@ int servohLimitLow = 20;
 
 Servo servoverti; 
 int servov = 63; 
-int servovLimitHigh = 160;
-int servovLimitLow = 25;
+int servovLimitHigh = 200;
+int servovLimitLow = 10;
 //Assigning LDRs
 int ldrtopl = 2; //top left LDR green
 int ldrtopr = 1; //top right LDR yellow
@@ -34,8 +34,8 @@ void setup() {
   delay(50);
   pinMode(buttonPin, INPUT);
   pinMode(3,INPUT);
-  Serial.begin(9600);
   buttonState = digitalRead(buttonPin);
+  Serial.begin(9600);
   //digitalWrite(3, HIGH);
 }
 
@@ -58,7 +58,7 @@ void loop() {
   }
 
  else {
-   if(digitalRead(3) == LOW) {
+   if(digitalRead(3) == HIGH) {
     servoh = servohori.read();
   servov = servoverti.read();
   //capturing analog values of each LDR
