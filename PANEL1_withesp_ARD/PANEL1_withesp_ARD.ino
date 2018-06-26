@@ -15,13 +15,6 @@ int ldrtopr = 1; //top right LDR yellow
 int ldrbotl = 3; // bottom left LDR blue
 int ldrbotr = 0; // bottom right LDR orange
 
-// set pin numbers:
-const int buttonPin = 2;     // the number of the pushbutton pin
- 
-// variables will change:
-int buttonState = 0;         // variable for reading the pushbutton status
-
-
 
 
 void setup() {
@@ -32,9 +25,8 @@ void setup() {
   servoverti.attach(9);
   servoverti.write(63);
   delay(50);
-  pinMode(buttonPin, INPUT);
-  pinMode(3,INPUT);
-  buttonState = digitalRead(buttonPin);
+  pinMode(3,INPUT); //ESP
+  pinMode(7,INPUT); //HUMIDITY
   Serial.begin(9600);
   //digitalWrite(3, HIGH);
 }
@@ -42,24 +34,13 @@ void setup() {
 
 void loop() {
   // read the state of the pushbutton value:
-  buttonState = digitalRead(buttonPin);
- 
-  // check if the pushbutton is pressed.
-  // if it is, the buttonState is HIGH:
-  if (buttonState == HIGH) {//FLOWER MODE
-    
-    Serial.println("-----------------------------------");
-    Serial.println("v");
-    Serial.println(servov);
-    Serial.println("h");
-    Serial.println(servoh);
-    servoverti.write(43);
-    servohori.write(101);
-  }
 
- else {
-   if(digitalRead(3) == HIGH) {
-    servoh = servohori.read();
+
+  if(digitalRead(3) == HIGH) //If nodeMCU is HIGH HUMIDITY MODE
+  {
+    if(digitalRead(7) == LOW) //Tracking
+    { 
+  servoh = servohori.read();
   servov = servoverti.read();
   //capturing analog values of each LDR
   int topl = analogRead(ldrtopl);
@@ -122,8 +103,18 @@ void loop() {
   }
   delay(50);
   }
+  else{  //HIGH FLOWER
+    Serial.println("-----------------------------------");
+    Serial.println("v");
+    Serial.println(servov);
+    Serial.println("h");
+    Serial.println(servoh);
+    servoverti.write(43);
+    servohori.write(101);
+  }
+ }
 
-  else{
+  else{   // FLOWER MODE IF NODEMCU LOW
         Serial.println("-----------------------------------");
     Serial.println("v");
     Serial.println(servov);
@@ -136,7 +127,6 @@ void loop() {
   
  }
 
-}
 
 
 

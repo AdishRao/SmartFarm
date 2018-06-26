@@ -2,8 +2,8 @@
 #include <SPI.h>
 #include <SoftwareSerial.h>
 //#define EOUT D5 //Using a digital pin for sending the signal to the UNO
-const char* ssid = "Hariram1";
-const char* password = "12a34b56c9";
+const char* ssid = "NETGEAR43";
+const char* password = "manicshrub289";
 
 WiFiServer server(80);
 

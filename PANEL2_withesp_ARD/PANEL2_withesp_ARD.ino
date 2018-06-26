@@ -1,6 +1,7 @@
 // constants won't change. They're used here to
 // set pin numbers:
 #include <Servo.h>
+
 //defining Servos
 Servo servohori;
 int servoh = 103;
@@ -17,10 +18,8 @@ int ldrtopr = 1; //top right LDR yellow
 int ldrbotl = 3; // bottom left LDR blue
 int ldrbotr = 0; // bottom right LDR orange
 
-const int buttonPin = 2;     // the number of the pushbutton pin
  
 // variables will change:
-int buttonState = 0;         // variable for reading the pushbutton status
 
 
  void setup() {
@@ -31,31 +30,20 @@ int buttonState = 0;         // variable for reading the pushbutton status
   servoverti.attach(9);
   servoverti.write(63);
   delay(50);
-  pinMode(buttonPin, INPUT);
   pinMode(3,INPUT);
-  buttonState = digitalRead(buttonPin);
+  pinMode(7,INPUT);
 }
 
 
 
 void loop() {
   // read the state of the pushbutton value:
-  buttonState = digitalRead(buttonPin);
- 
-  // check if the pushbutton is pressed.
-  // if it is, the buttonState is HIGH:
-  if (buttonState == HIGH) {//FLOWER MODE
-      Serial.println("-----------------------------------");
-    Serial.println("v");
-  Serial.println(servov);
-    Serial.println("h");  
-  Serial.println(servoh);
-    servoverti.write(50);
-    servohori.write(85);
-  }
 
-  else {
-   if(digitalRead(3) == HIGH) {
+ 
+
+   if(digitalRead(3) == HIGH) { //NODEMCU HUMIDITY
+     if(digitalRead(7) == LOW) // Solar Tracking
+  { 
     servoh = servohori.read();
   servov = servoverti.read();
   //capturing analog values of each LDR
@@ -123,7 +111,19 @@ void loop() {
   }
   delay(50);
    }
-   else{//FLOWER MODE
+   else{ //Water harvesting Humidity
+    Serial.println("-----------------------------------");
+    Serial.println("v");
+    Serial.println(servov);
+    Serial.println("h");
+    Serial.println(servoh);
+    servoverti.write(43);
+    servohori.write(101);
+  }
+
+  }
+   
+   else{//FLOWER MODE MCU
       Serial.println("-----------------------------------");
     Serial.println("v");
   Serial.println(servov);
@@ -132,8 +132,7 @@ void loop() {
     servoverti.write(50);
     servohori.write(85);
   }
+ }
 
-   }
 
-}
 
